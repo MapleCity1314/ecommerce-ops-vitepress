@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "deepseek-ocr": {
+      "source": "aradotso/trending-skills",
+      "sourceType": "github",
+      "skillPath": "skills/deepseek-ocr/SKILL.md",
+      "computedHash": "aad3eb372fff9e0ee13a4b6570b4b6aa8f916da2e3eb6fef6fc6d833a4c74837"
+    }
+  }
+}

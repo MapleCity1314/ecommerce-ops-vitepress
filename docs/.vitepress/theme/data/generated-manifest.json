@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-06-29T16:40:30.550Z",
+  "modules": [
+    {
+      "id": "product-test",
+      "title": "测款 SOP 流程搭建",
+      "route": "/sop/product-test",
+      "imageCount": 5,
+      "sectionCount": 16
+    },
+    {
+      "id": "image-test",
+      "title": "测图 SOP 流程打造",
+      "route": "/sop/image-test",
+      "imageCount": 4,
+      "sectionCount": 16
+    },
+    {
+      "id": "click-rate",
+      "title": "爆款点击率优化",
+      "route": "/growth/click-rate",
+      "imageCount": 13,
+      "sectionCount": 13
+    },
+    {
+      "id": "new-product",
+      "title": "新品快速打爆 SOP 流程",
+      "route": "/growth/new-product",
+      "imageCount": 9,
+      "sectionCount": 13
+    },
+    {
+      "id": "category-research",
+      "title": "快速调研类目玩法",
+      "route": "/growth/category-research",
+      "imageCount": 10,
+      "sectionCount": 17
+    },
+    {
+      "id": "department-kb",
+      "title": "电商运营部门知识库",
+      "route": "/team/department-kb",
+      "imageCount": 0,
+      "sectionCount": 15
+    },
+    {
+      "id": "operator-training",
+      "title": "运营培育体系搭建",
+      "route": "/team/operator-training",
+      "imageCount": 15,
+      "sectionCount": 19
+    },
+    {
+      "id": "process-system",
+      "title": "流程化组织学习资料参考",
+      "route": "/org/process-system",
+      "imageCount": 70,
+      "sectionCount": 17
+    }
+  ]
+}

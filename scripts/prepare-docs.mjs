@@ -376,7 +376,7 @@ export const nav = [
   await fs.writeFile(
     manifestFile,
     `${JSON.stringify({
-      generatedAt: new Date().toISOString(),
+      generatedAt: 'stable',
       modules: generated.map((item) => ({
         id: item.id,
         title: item.title,

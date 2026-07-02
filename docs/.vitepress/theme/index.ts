@@ -7,6 +7,7 @@ import ModuleFlow from './components/ModuleFlow.vue'
 import DocHero from './components/DocHero.vue'
 import RelatedDocs from './components/RelatedDocs.vue'
 import ImageGallery from './components/ImageGallery.vue'
+import AIMaterialWarRoom from './components/AIMaterialWarRoom.vue'
 
 export default {
   extends: DefaultTheme,
@@ -17,5 +18,6 @@ export default {
     app.component('DocHero', DocHero)
     app.component('RelatedDocs', RelatedDocs)
     app.component('ImageGallery', ImageGallery)
+    app.component('AIMaterialWarRoom', AIMaterialWarRoom)
   }
 } satisfies Theme

@@ -1,5 +1,14 @@
 export const sidebar = [
   {
+    "text": "AI 素材作战",
+    "items": [
+      {
+        "text": "爆款素材工作流雏形",
+        "link": "/ai-material-war-room"
+      }
+    ]
+  },
+  {
     "text": "选品测款",
     "items": [
       {
@@ -64,9 +73,28 @@ export const sidebar = [
 ]
 
 export const nav = [
-  { text: '作战台', link: '/' },
-  { text: '测款测图', link: '/sop/product-test' },
-  { text: '增长优化', link: '/growth/click-rate' },
-  { text: '团队体系', link: '/team/department-kb' },
-  { text: '组织流程', link: '/org/process-system' }
+  {
+    "text": "作战台",
+    "link": "/"
+  },
+  {
+    "text": "AI 素材作战",
+    "link": "/ai-material-war-room"
+  },
+  {
+    "text": "测款测图",
+    "link": "/sop/product-test"
+  },
+  {
+    "text": "增长优化",
+    "link": "/growth/click-rate"
+  },
+  {
+    "text": "团队体系",
+    "link": "/team/department-kb"
+  },
+  {
+    "text": "组织流程",
+    "link": "/org/process-system"
+  }
 ]

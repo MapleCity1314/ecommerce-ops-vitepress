@@ -261,6 +261,9 @@ function writeIndex() {
     '  tagline: 用结构化流程、资料地图和 Vue 可视化组件，把散落的运营经验变成可执行的团队资产。',
     '  actions:',
     '    - theme: brand',
+    '      text: AI 素材作战',
+    '      link: /ai-material-war-room',
+    '    - theme: alt',
     '      text: 进入知识地图',
     '      link: /sop/product-test',
     '    - theme: alt',
@@ -272,6 +275,35 @@ function writeIndex() {
     '',
     '<KnowledgeMap />'
   ].join('\n');
+}
+
+function sidebarGroups(generated) {
+  return [
+    {
+      text: 'AI 素材作战',
+      items: [
+        {
+          text: '爆款素材工作流雏形',
+          link: '/ai-material-war-room'
+        }
+      ]
+    },
+    ...categories.map((category) => ({
+      text: category,
+      items: generated.filter((item) => item.category === category).map((item) => ({ text: item.title, link: item.route }))
+    }))
+  ];
+}
+
+function navItems() {
+  return [
+    { text: '作战台', link: '/' },
+    { text: 'AI 素材作战', link: '/ai-material-war-room' },
+    { text: '测款测图', link: '/sop/product-test' },
+    { text: '增长优化', link: '/growth/click-rate' },
+    { text: '团队体系', link: '/team/department-kb' },
+    { text: '组织流程', link: '/org/process-system' }
+  ];
 }
 
 function frontMatterSafe(value) {
@@ -353,21 +385,11 @@ export const totals = {
   );
 
   const sidebarFile = path.join(docsDir, '.vitepress', 'theme', 'data', 'sidebar.ts');
-  const groups = categories.map((category) => ({
-    text: category,
-    items: generated.filter((item) => item.category === category).map((item) => ({ text: item.title, link: item.route }))
-  }));
   await fs.writeFile(
     sidebarFile,
-    `export const sidebar = ${JSON.stringify(groups, null, 2)}
+    `export const sidebar = ${JSON.stringify(sidebarGroups(generated), null, 2)}
 
-export const nav = [
-  { text: '作战台', link: '/' },
-  { text: '测款测图', link: '/sop/product-test' },
-  { text: '增长优化', link: '/growth/click-rate' },
-  { text: '团队体系', link: '/team/department-kb' },
-  { text: '组织流程', link: '/org/process-system' }
-]
+export const nav = ${JSON.stringify(navItems(), null, 2)}
 `,
     'utf8'
   );

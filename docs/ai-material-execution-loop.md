@@ -9,6 +9,8 @@ description: 对昊七七烤冷面 AI 爆款素材企业化方案的针对性修
 
 这份文档不是替代《AI 爆款素材企业化工作流研究草案》，而是对它的第一轮执行修复。
 
+> 当前最终定稿已沉淀为：[昊七七烤冷面 AI 爆款素材企业化最终定稿方案](/ai-material-final-blueprint)。该版本整合了本页的最小闭环，并补充浏览器自动化、飞书数字员工和更完整的人审边界。
+
 上一版文档解决的是“企业化爆款素材系统应该长什么样”；本文件解决的是“明天真的要开工，第一轮该怎么跑才不失控”。因此本文只保留一个主 SKU、两个目标人群、两类封面、两类前 3 秒钩子，并把飞书字段、状态流、权限、AI Agent 输出约束、封面生成协议、食品合规清单和数据决策规则写到可执行颗粒度。
 
 ## 与原方案的关系
@@ -29,4 +31,3 @@ description: 对昊七七烤冷面 AI 爆款素材企业化方案的针对性修
 - [OpenAI Function Calling](https://developers.openai.com/api/docs/guides/function-calling)
 - [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/)
 - [北京市市场监督管理局：普通食品广告合规红线](https://scjgj.beijing.gov.cn/zwxx/scjgdt/202510/t20251021_4234743.html)
-

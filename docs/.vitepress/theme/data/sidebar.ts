@@ -3,6 +3,10 @@ export const sidebar = [
     "text": "AI 素材作战",
     "items": [
       {
+        "text": "企业化最终定稿方案",
+        "link": "/ai-material-final-blueprint"
+      },
+      {
         "text": "第一轮最小可执行闭环",
         "link": "/ai-material-execution-loop"
       },
@@ -80,6 +84,10 @@ export const nav = [
   {
     "text": "作战台",
     "link": "/"
+  },
+  {
+    "text": "AI 最终定稿",
+    "link": "/ai-material-final-blueprint"
   },
   {
     "text": "AI 执行闭环",

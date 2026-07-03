@@ -261,6 +261,9 @@ function writeIndex() {
     '  tagline: 用结构化流程、资料地图和 Vue 可视化组件，把散落的运营经验变成可执行的团队资产。',
     '  actions:',
     '    - theme: brand',
+    '      text: AI 最终定稿',
+    '      link: /ai-material-final-blueprint',
+    '    - theme: alt',
     '      text: 第一轮执行闭环',
     '      link: /ai-material-execution-loop',
     '    - theme: alt',
@@ -283,6 +286,10 @@ function sidebarGroups(generated) {
       text: 'AI 素材作战',
       items: [
         {
+          text: '企业化最终定稿方案',
+          link: '/ai-material-final-blueprint'
+        },
+        {
           text: '第一轮最小可执行闭环',
           link: '/ai-material-execution-loop'
         },
@@ -302,6 +309,7 @@ function sidebarGroups(generated) {
 function navItems() {
   return [
     { text: '作战台', link: '/' },
+    { text: 'AI 最终定稿', link: '/ai-material-final-blueprint' },
     { text: 'AI 执行闭环', link: '/ai-material-execution-loop' },
     { text: 'AI 研究草案', link: '/ai-material-war-room' },
     { text: '测款测图', link: '/sop/product-test' },

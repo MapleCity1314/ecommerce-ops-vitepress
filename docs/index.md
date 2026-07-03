@@ -7,6 +7,9 @@ hero:
   tagline: 用结构化流程、资料地图和 Vue 可视化组件，把散落的运营经验变成可执行的团队资产。
   actions:
     - theme: brand
+      text: AI 最终定稿
+      link: /ai-material-final-blueprint
+    - theme: alt
       text: 第一轮执行闭环
       link: /ai-material-execution-loop
     - theme: alt

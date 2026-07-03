@@ -9,6 +9,7 @@ import RelatedDocs from './components/RelatedDocs.vue'
 import ImageGallery from './components/ImageGallery.vue'
 import AIMaterialWarRoom from './components/AIMaterialWarRoom.vue'
 import AIMaterialExecutionLoop from './components/AIMaterialExecutionLoop.vue'
+import AIMaterialFinalBlueprint from './components/AIMaterialFinalBlueprint.vue'
 
 export default {
   extends: DefaultTheme,
@@ -21,5 +22,6 @@ export default {
     app.component('ImageGallery', ImageGallery)
     app.component('AIMaterialWarRoom', AIMaterialWarRoom)
     app.component('AIMaterialExecutionLoop', AIMaterialExecutionLoop)
+    app.component('AIMaterialFinalBlueprint', AIMaterialFinalBlueprint)
   }
 } satisfies Theme

@@ -1,381 +1,173 @@
 <script setup lang="ts">
-const evidence = [
+const timelineScale = [
+  { label: 'T0', note: '实验启动' },
+  { label: '0.5h', note: '变量锁定' },
+  { label: '2h', note: '事实供给' },
+  { label: '4h', note: '候选生成' },
+  { label: '6h', note: '人工收敛' },
+  { label: '8h', note: '审核上线' },
+  { label: '24h', note: '首轮回收' },
+  { label: '48h', note: '稳定观察' },
+  { label: '72h', note: '复盘决策' },
+  { label: 'T+4', note: '规则沉淀' }
+]
+
+const expandedTimeline = [
   {
-    source: 'TikTok Creative Best Practices',
-    point: '短视频创意需要平台原生表达、前 6 秒吸引点、前 3 秒内容主张、多版本创意和持续焕新素材库。',
-    use: '把爆款素材能力定义为持续实验系统，而不是单条视频灵感。',
-    url: 'https://ads.tiktok.com/help/article/creative-best-practices?lang=zh'
+    phase: '生产推进',
+    group: '运营研究组',
+    duty: '定义变量、实验编号和最终去留',
+    bars: [
+      { start: 1, end: 3, label: '立项与变量锁定', type: 'decision', output: '实验设计单' },
+      { start: 5, end: 6, label: '候选版本收敛', type: 'review', output: '可测清单' },
+      { start: 9, end: 11, label: '复盘与下一轮立项', type: 'decision', output: '下一轮假设' }
+    ]
   },
   {
-    source: 'TikTok Split Testing',
-    point: 'Split test 要尽量保持其他变量一致，并把受众拆开，以便判断不同版本表现。',
-    use: '封面、钩子、叙事、承接和投放变量必须拆开管理。',
-    url: 'https://ads.tiktok.com/help/article/split-testing?lang=en'
+    phase: '事实供给',
+    group: '供应链/品控',
+    duty: '确认 SKU、价格、库存、规格和发货边界',
+    bars: [
+      { start: 1, end: 3, label: 'SKU/库存/价格确认', type: 'review', output: '事实包' },
+      { start: 6, end: 7, label: '发布前复核', type: 'review', output: '可发布' },
+      { start: 7, end: 9, label: '履约风险监测', type: 'data', output: '库存/发货预警' }
+    ]
   },
   {
-    source: 'OpenAI Function Calling / Structured Outputs',
-    point: '模型可以通过工具调用连接外部系统，也可以按 JSON Schema 输出严格结构化结果。',
-    use: '让 Agent 输出进入飞书字段，而不是散落在聊天记录里。',
-    url: 'https://developers.openai.com/api/docs/guides/function-calling'
+    phase: '事实供给',
+    group: '客服洞察组',
+    duty: '把咨询、差评和退款原因转成素材输入',
+    bars: [
+      { start: 1, end: 3, label: '用户原话提取', type: 'work', output: '购买理由/质疑点' },
+      { start: 5, end: 6, label: '评论承接话术审核', type: 'review', output: '标准回复' },
+      { start: 7, end: 10, label: '评论区新问题回收', type: 'data', output: '新增痛点' }
+    ]
   },
   {
-    source: 'OpenAI Computer Use',
-    point: '模型可以通过截图理解界面并返回点击、输入、滚动等 UI 动作；官方建议隔离环境、域名/动作白名单和高影响动作人审。',
-    use: '把浏览器自动化纳入素材实验系统，用于后台巡检、数据下载、页面核对和表单预填。',
-    url: 'https://developers.openai.com/api/docs/guides/tools-computer-use'
+    phase: '素材供给',
+    group: '工厂/仓库素材组',
+    duty: '交付真实生产、质检、打包和发货画面',
+    bars: [
+      { start: 2, end: 4, label: '生产/质检/打包实拍', type: 'work', output: '真实素材包' },
+      { start: 4, end: 5, label: '缺口补拍', type: 'work', output: '补充镜头' },
+      { start: 5, end: 6, label: '事实复核', type: 'review', output: '画面可用' }
+    ]
   },
   {
-    source: 'Playwright',
-    point: 'Playwright 支持 Chromium、WebKit、Firefox，并提供端到端测试、隔离、并行、报告等能力。',
-    use: '作为确定性浏览器自动化底座，优先处理可脚本化、可重复的网页动作。',
-    url: 'https://playwright.dev/docs/intro'
+    phase: 'AI 辅助',
+    group: 'AI Agent 编队',
+    duty: '扩大候选空间并结构化输出',
+    bars: [
+      { start: 2, end: 4, label: '情报/脚本/封面候选', type: 'ai', output: '候选池' },
+      { start: 4, end: 5, label: '分镜与提示词整理', type: 'ai', output: '生产清单' },
+      { start: 8, end: 10, label: '胜败因初判', type: 'ai', output: '归因草稿' }
+    ]
   },
   {
-    source: 'OpenAI Agents SDK Guardrails / Tracing',
-    point: 'Guardrails 可对输入、输出和工具调用做校验；Tracing 支持查看和追踪 Agent 执行过程。',
-    use: '所有自动化动作必须可追踪、可审计、可回滚。',
-    url: 'https://openai.github.io/openai-agents-python/guardrails/'
+    phase: '生产推进',
+    group: '封面/设计组',
+    duty: '把封面作为入口承诺单独验证',
+    bars: [
+      { start: 3, end: 5, label: '四类封面生成', type: 'ai', output: '封面候选' },
+      { start: 5, end: 6, label: '精修与安全区检查', type: 'work', output: '可测封面' },
+      { start: 7, end: 9, label: '封面 CTR 归因', type: 'data', output: '封面结论' }
+    ]
   },
   {
-    source: '飞书 aily 自定义智能体',
-    point: '飞书 aily 支持面向团队的自定义智能体，可操作文档、多维表格、任务等模块，并强调统一管控、变更记录和回滚。',
-    use: '把 AI 从个人助手升级为企业数字员工。',
-    url: 'https://www.feishu.cn/content/article/7631864469689240764'
+    phase: '生产推进',
+    group: '视频制作组',
+    duty: '让视频开头兑现封面承诺',
+    bars: [
+      { start: 3, end: 4, label: '分镜和拍摄清单', type: 'work', output: '分镜稿' },
+      { start: 4, end: 6, label: '拍摄/粗剪/二创', type: 'work', output: '视频版本' },
+      { start: 6, end: 7, label: '源文件归档', type: 'work', output: '资产记录' }
+    ]
   },
   {
-    source: '普通食品广告合规资料',
-    point: '普通食品广告不得涉及疾病预防、治疗功能，不得虚假宣传；非保健食品不得声称保健功能。',
-    use: '食品素材必须把事实、合规和发布权放在人审节点。',
-    url: 'https://scjgj.beijing.gov.cn/zwxx/scjgdt/202510/t20251021_4234743.html'
+    phase: '自动化辅助',
+    group: '浏览器自动化',
+    duty: '只做巡检、截图、下载、核对和预填',
+    bars: [
+      { start: 2, end: 4, label: '商品页/库存核对', type: 'data', output: '一致性预警' },
+      { start: 5, end: 6, label: '投放后台预填', type: 'work', output: '待确认草稿' },
+      { start: 7, end: 9, label: '报表下载/截图归档', type: 'data', output: '证据链' }
+    ]
+  },
+  {
+    phase: '验证投放',
+    group: '品控/合规组',
+    duty: '保护事实、食品宣传和经营承诺边界',
+    bars: [
+      { start: 2, end: 3, label: '禁用表达预审', type: 'review', output: '风险边界' },
+      { start: 5, end: 7, label: '视频/封面/话术终审', type: 'review', output: '审核结论' },
+      { start: 8, end: 9, label: '投诉风险复核', type: 'review', output: '风险处置' }
+    ]
+  },
+  {
+    phase: '验证投放',
+    group: '投放/渠道组',
+    duty: '控制变量并回收市场反馈',
+    bars: [
+      { start: 5, end: 6, label: '计划映射实验编号', type: 'work', output: '投放计划' },
+      { start: 6, end: 9, label: '小预算测试与观察', type: 'data', output: '首轮数据' },
+      { start: 9, end: 10, label: '放量/暂停/继续观察', type: 'decision', output: '投放决策' }
+    ]
+  },
+  {
+    phase: '复盘迭代',
+    group: '数据/知识库组',
+    duty: '判断样本资格并沉淀规则',
+    bars: [
+      { start: 7, end: 9, label: '数据清洗与异常标记', type: 'data', output: '可用数据' },
+      { start: 9, end: 10, label: '胜败因复盘会', type: 'decision', output: '复盘结论' },
+      { start: 10, end: 11, label: '规则入库', type: 'data', output: '知识规则' }
+    ]
   }
 ]
 
-const principles = [
-  ['一个目标', '建立可持续发现爆款素材元素的企业系统，而不是承诺每条素材都会爆。'],
-  ['一个数据底座', '所有假设、素材、封面、投放、评论、合规、复盘必须进入同一套飞书多维表格。'],
-  ['一个变量纪律', '同一轮实验只改变可归因变量，封面、钩子、叙事、承接、投放设置不得混测。'],
-  ['一个 AI 边界', 'AI 可以检索、生成、预填、检查、归因、催办，但事实、合规、价格、库存、发布和放量由人确认。'],
-  ['一个自动化原则', '优先自动化重复网页动作和结构化字段动作；凡涉及账号、付款、发布、改价、放量、删除、授权，必须人审。']
-]
-
-const systemLayers = [
-  ['信息感知层', '竞品、评论、热词、平台趋势、后台数据、客服记录', '情报 Agent、评论洞察 Agent、浏览器巡检脚本', '把散乱信息转成假设库。'],
-  ['事实约束层', 'SKU、规格、价格、库存、毛利、发货、资质、禁用词', '事实包校验 Agent、字段完整性检查、冲突检测', '没有事实包不进入生成和发布。'],
-  ['创意生产层', '封面、钩子、脚本、分镜、口播、二创、评论区回复', '脚本 Agent、封面 Agent、分镜 Agent、AIGC 工具', '批量生成候选，人工收敛为可投版本。'],
-  ['流程编排层', '飞书状态流、任务催办、审核流、阻塞提醒、版本记录', '飞书数字员工、工作流 AI Agent 节点、自动提醒', '减少等待和漏项。'],
-  ['浏览器自动化层', '创意中心、竞品页面、店铺后台、投放后台、数据报表、商品页核对', 'Playwright、Computer Use、RPA 脚本、截图归档', '替代重复网页操作，不替代高影响决策。'],
-  ['投放验证层', '小量上线、样本资格、指标回写、异常归因、评论风险', '投放归因 Agent、数据回写脚本、日报生成', '把市场反馈写回实验编号。'],
-  ['知识沉淀层', '胜因、败因、适用条件、失效条件、下一轮 Prompt 和规则', '知识库 Agent、规则库自动草稿、复盘摘要', '让经验可复用、可失效、可更新。']
-]
-
-const workflow = [
-  ['1. 情报进入', '收集竞品、评论、热词、历史数据、后台异常。', 'AI 自动聚类、摘要、发现候选假设。', '浏览器巡检公开页面、创意中心、竞品页，按白名单截图归档。', '运营确认哪些情报进入假设库。', '情报样本包'],
-  ['2. 事实包锁定', '确认 SKU、价格、库存、毛利、规格、发货、资质。', 'AI 检查缺字段和互相矛盾的承诺。', '自动核对商品页、后台库存、活动价页面截图。', '供应链、品控、店铺运营确认。', '事实包'],
-  ['3. 实验立项', '选择本轮变量和样本口径。', 'AI 生成实验矩阵、固定变量、失败归因口径。', '自动创建飞书实验记录并预填字段。', '运营负责人锁定实验单。', '实验设计单'],
-  ['4. 候选生产', '生成封面、钩子、脚本、分镜、二创方向。', 'AI 批量产出候选并自检禁用词、事实一致性。', '自动把候选稿写入素材资产库。', '设计、视频、运营筛选可投版本。', '候选稿池'],
-  ['5. 素材制作', '完成封面、开头、成片、商品承接话术。', 'AI 生成剪辑清单、字幕稿、封面文案、客服回复初稿。', '自动检查画面安全区、链接可访问、封面文字可读性。', '设计/视频最终制作。', '可审素材'],
-  ['6. 发布前审核', '审核食品合规、事实承诺、价格库存、AI 伪真实风险。', '合规 Agent 做初筛并给风险等级。', '浏览器自动打开素材、商品页、活动页做逐项核对。', '合规、品控、负责人拥有否决权。', '审核记录'],
-  ['7. 小量上线', '低预算验证入口、留存、承接、转化。', 'AI 生成计划命名、投放备注、监测字段。', '浏览器自动预填投放后台，但最终发布/预算由人点击确认。', '投放负责人发布。', '投放计划'],
-  ['8. 数据回写', '按实验编号回收曝光、点击、留存、成交、评论、退款。', 'AI 判断样本资格和异常层级。', '浏览器自动下载报表、读取后台指标、保存截图。', '数据组确认口径。', '数据回写表'],
-  ['9. 复盘决策', '判断淘汰、观察、二创、放量、合规暂停。', 'AI 生成胜败因草稿和下一轮建议。', '自动拉取素材、报表、评论截图形成复盘附件。', '运营负责人决策，供应链确认放量承接。', '复盘结论'],
-  ['10. 规则入库', '沉淀可复用规律和失效条件。', '知识库 Agent 写规则草案，更新 Prompt。', '自动给相关素材和实验编号打标签。', '运营负责人批准正式规则。', '知识规则库']
-]
-
-const automationMatrix = [
-  ['可自动执行', '竞品公开页巡检、素材库截图归档、报表下载、字段完整性检查、日报生成、状态催办。', '不涉及账号高权限、不改变业务状态、不对外发布。', '自动运行，异常进入人工队列。'],
-  ['可自动预填', '飞书实验单、投放计划命名、商品页核对清单、素材审核记录、复盘报告草稿。', '预填不等于提交，所有高影响动作前停住。', '人确认后提交。'],
-  ['可自动初筛', '食品合规风险、封面承诺兑现、价格库存冲突、素材变量混杂、样本不足。', '初筛只给风险等级和证据，不给最终放行。', '合规/负责人判定。'],
-  ['可自动生成', '封面标题、脚本、钩子、分镜、评论回复、二创方向、详情页承接文案。', '必须绑定事实包和禁用词，不允许伪造真实工厂、用户评价、检测证书。', '人工筛选和改写。'],
-  ['必须人工决策', '价格、库存、资质、发布、放量、停投、退款投诉处理、账号授权、付款、删除。', '属于经营责任、法律责任或不可逆动作。', 'AI 只能提示和准备材料。']
-]
-
-const browserUseCases = [
-  ['竞品巡检', '按白名单打开竞品商品页、直播切片页、短视频页，截图并记录价格、封面、开头、评论质疑。', '新增竞品样本、异常价格、评论痛点。', '只抓公开或已授权可看的信息，不绕过登录和反爬限制。'],
-  ['创意中心观察', '定时访问平台创意中心或广告灵感页，收集热门结构、标题形式、画面表达。', '趋势样本、可验证假设。', '只作为灵感拆解，不照搬素材。'],
-  ['商品页一致性核对', '自动打开商品详情页、活动价、优惠券、库存和发货承诺页面，对照事实包。', '价格/库存/规格不一致预警。', '不自动改价、不自动改库存。'],
-  ['投放后台辅助', '预填计划名称、实验编号、素材 ID、预算备注，截图确认设置。', '待人工确认的投放草稿。', '最终发布、预算增加、停投必须人确认。'],
-  ['数据报表下载', '按实验编号进入后台下载或复制曝光、点击、留存、成交、花费数据。', '投放数据回写表。', '口径变更需数据负责人确认。'],
-  ['评论与客服监控', '巡检评论区、客服咨询、退款原因，自动聚类为疑虑、好评、差评、误导风险。', '评论洞察和客服话术建议。', '不自动代表品牌回复高风险评论。'],
-  ['页面视觉 QA', '自动打开最终商品页和素材页，检查图片是否加载、文字是否遮挡、移动端是否可读。', '页面截图和问题清单。', '只做检查，不替代设计负责人验收。'],
-  ['复盘证据归档', '把投放后台、商品页、评论区、素材版本截图绑定到实验编号。', '可审计证据链。', '截图需标注采集时间和账号范围。']
-]
-
-const agents = [
-  ['情报数字员工', '每日巡检竞品、平台趋势、评论和历史素材。', '浏览器自动化、WebSearch、飞书多维表格', '假设库、竞品样本库', '不能照搬竞品素材。'],
-  ['事实包数字员工', '检查 SKU、价格、库存、规格、发货、毛利、资质缺口。', '飞书表格、商品后台只读、浏览器截图', '事实包状态、冲突预警', '不能修改价格库存。'],
-  ['创意生产数字员工', '生成封面、钩子、脚本、分镜、二创方向。', 'LLM、图像生成工具、资产库', '素材资产库、候选稿字段', '不能伪造真实场景和证据。'],
-  ['合规初筛数字员工', '扫描食品广告禁区、绝对化表达、价格不一致、AI 伪真实。', '规则库、素材文本、截图 OCR', '审核记录表风险等级', '不能最终放行。'],
-  ['浏览器自动化员工', '执行白名单网页巡检、下载、截图、预填、可用性测试。', 'Playwright、Computer Use、RPA', '证据附件、报表文件、预填草稿', '不能提交高影响动作。'],
-  ['投放归因数字员工', '判断样本资格、异常层级、下一轮变量。', '投放数据表、评论表、素材变量表', '复盘草稿、决策建议', '不能决定放量。'],
-  ['知识库数字员工', '把胜因、败因、适用条件、失效条件写入规则库。', '复盘表、素材库、审核表', '知识规则库、Prompt 规则', '规则正式生效需运营批准。']
-]
-
-const feishuTables = [
-  ['素材实验主表', '实验编号、SKU、人群、变量、状态、负责人、当前阻塞、结论。', '状态变化触发催办、人审、投放和复盘任务。'],
-  ['事实包表', '价格、库存、规格、毛利、发货、资质、保质期、可证明卖点。', '任一关键字段未确认时阻塞素材生成和发布。'],
-  ['素材资产库', '封面、脚本、分镜、成片、二创、来源、授权、关联实验。', '胜出组件自动标记为高价值资产。'],
-  ['浏览器自动化任务表', '任务名称、域名白名单、动作类型、账号权限、运行时间、截图证据、异常结果。', '自动运行后写入证据和异常，遇到高影响动作停住等人审。'],
-  ['审核记录表', '审核对象、风险等级、命中规则、修改建议、审核人、复核时间。', '未通过审核时实验状态退回。'],
-  ['投放数据回写表', '计划 ID、素材 ID、曝光、点击、留存、成交、ROI、退款、投诉、评论摘要。', '达到样本或异常条件后触发复盘。'],
-  ['知识规则库', '规则类型、内容、适用条件、失效条件、引用实验、置信度、维护人。', '复盘通过后生成规则草案，人审后生效。']
-]
-
-const gates = [
-  ['事实门', '没有 SKU、价格、库存、规格、发货、资质确认，不允许生成发布稿。'],
-  ['合规模', '出现疾病治疗、保健功效、绝对化、未证实数据、AI 伪真实，直接退回。'],
-  ['账号门', '浏览器自动化不得读取密码、绕过登录、扩大权限、保存凭证。'],
-  ['发布门', '投放发布、预算增加、改价、改库存、删除、授权、付款必须人工确认。'],
-  ['样本门', '样本不足时只观察，不写胜负结论。'],
-  ['履约门', '毛利、库存、发货、客服压力、退款投诉不达标时禁止放量。'],
-  ['知识门', '规则入库必须写明适用条件和失效条件，不能把一次偶然胜出写成永久规律。']
-]
-
-const launchOrder = [
-  ['先建表', '搭建七张飞书表，先让字段和状态跑通。'],
-  ['再接 AI', '把情报、脚本、封面、合规、归因、知识库 Agent 接到对应字段。'],
-  ['再接浏览器自动化', '从只读巡检、截图、下载、预填开始，不碰发布和预算。'],
-  ['再跑最小实验', '用 1 个 SKU、2 类人群、2 类封面、2 类钩子完成一轮闭环。'],
-  ['再扩大规模', '跑通后扩展到更多 SKU、更多素材类型、更多渠道和更高自动化权限。']
-]
+function barStyle(bar: { start: number; end: number }) {
+  return {
+    gridColumn: `${bar.start} / ${bar.end}`
+  }
+}
 </script>
 
 <template>
-  <section class="execution-report final-blueprint">
-    <header class="execution-header">
-      <p class="execution-kicker">昊七七烤冷面 / AI 爆款素材企业化系统 / 最终定稿</p>
-      <h1>以 AI Agent、飞书数字员工和浏览器自动化驱动的爆款素材产出工作流</h1>
-      <p>
-        本方案的最终目标不是“用 AI 写几条爆款脚本”，而是建立一套企业级素材实验操作系统：让信息进入、事实确认、创意生产、浏览器巡检、投放验证、数据回写、复盘入库形成连续闭环。AI 负责压缩信息、生成候选、执行低风险网页动作、检查流程缺口和提出归因草稿；人负责事实、合规、经营承诺、发布和放量。
-      </p>
-      <p>
-        本方案所有结论仍按待验证假设处理。外部资料提供方法依据，不代表昊七七烤冷面已经获得相同结果。真正生效的规则只能来自公司自己的实验编号、投放数据、客服反馈和履约结果。
-      </p>
-    </header>
-
-    <section class="execution-section">
-      <h2>一、最终原则</h2>
-      <table class="execution-table">
-        <thead>
-          <tr>
-            <th>原则</th>
-            <th>定稿表述</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in principles" :key="row[0]">
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="execution-section">
-      <h2>二、研究依据</h2>
-      <table class="execution-table execution-table--wide">
-        <thead>
-          <tr>
-            <th>来源</th>
-            <th>可采纳依据</th>
-            <th>进入本方案的方式</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in evidence" :key="item.source">
-            <td><a :href="item.url" target="_blank" rel="noreferrer">{{ item.source }}</a></td>
-            <td>{{ item.point }}</td>
-            <td>{{ item.use }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="execution-section">
-      <h2>三、系统总架构</h2>
-      <p>最终系统不按“视频部门单点生产”设计，而按七个能力层设计。每一层都有明确输入、自动化能力和业务输出。</p>
-      <table class="execution-table execution-table--wide">
-        <thead>
-          <tr>
-            <th>能力层</th>
-            <th>输入范围</th>
-            <th>AI/自动化能力</th>
-            <th>业务输出</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in systemLayers" :key="row[0]">
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-            <td>{{ row[3] }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="execution-section">
-      <h2>四、最终工作流</h2>
-      <p>一份素材实验从情报进入到规则入库共十个动作。浏览器自动化被放入流程中，但只承担巡检、下载、截图、核对和预填，不拥有发布和放量权。</p>
-      <table class="execution-table execution-table--wide">
-        <thead>
-          <tr>
-            <th>动作</th>
-            <th>目标</th>
-            <th>AI 加速能力</th>
-            <th>浏览器自动化能力</th>
-            <th>人工关口</th>
-            <th>输出</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in workflow" :key="row[0]">
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-            <td>{{ row[3] }}</td>
-            <td>{{ row[4] }}</td>
-            <td>{{ row[5] }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="execution-section">
-      <h2>五、AI 可替代与不可替代边界</h2>
-      <p>AI 可以替代大量重复劳动，但不能替代经营责任。下表是最终权限边界。</p>
-      <table class="execution-table">
-        <thead>
-          <tr>
-            <th>等级</th>
-            <th>可覆盖动作</th>
-            <th>边界</th>
-            <th>处理方式</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in automationMatrix" :key="row[0]">
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-            <td>{{ row[3] }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="execution-section">
-      <h2>六、浏览器自动化能力清单</h2>
-      <p>浏览器自动化适合处理网页后台里重复、可记录、可回滚或只读的动作。对于不稳定 UI、强账号权限、最终发布、付款和删除动作，只能作为人审前辅助。</p>
-      <table class="execution-table execution-table--wide">
-        <thead>
-          <tr>
-            <th>场景</th>
-            <th>自动化动作</th>
-            <th>输出</th>
-            <th>边界</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in browserUseCases" :key="row[0]">
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-            <td>{{ row[3] }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="execution-section">
-      <h2>七、数字员工编队</h2>
-      <table class="execution-table execution-table--wide">
-        <thead>
-          <tr>
-            <th>数字员工</th>
-            <th>职责</th>
-            <th>工具</th>
-            <th>写入位置</th>
-            <th>禁止动作</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in agents" :key="row[0]">
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-            <td>{{ row[3] }}</td>
-            <td>{{ row[4] }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="execution-section">
-      <h2>八、飞书数据底座</h2>
-      <p>最终方案必须落在表结构和状态流上。没有数据底座，AI 只能产出零散内容，无法形成企业资产。</p>
-      <table class="execution-table execution-table--wide">
-        <thead>
-          <tr>
-            <th>数据表</th>
-            <th>关键字段</th>
-            <th>自动化规则</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in feishuTables" :key="row[0]">
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="execution-section">
-      <h2>九、人审与安全门</h2>
-      <table class="execution-table">
-        <thead>
-          <tr>
-            <th>关口</th>
-            <th>规则</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in gates" :key="row[0]">
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="execution-section">
-      <h2>十、落地顺序</h2>
-      <p>落地时不要一开始就给浏览器自动化过高权限。先让系统能记录、能提醒、能下载、能截图、能预填，再逐步扩大自动化范围。</p>
-      <table class="execution-table">
-        <thead>
-          <tr>
-            <th>顺序</th>
-            <th>动作</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in launchOrder" :key="row[0]">
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="execution-section">
-      <h2>十一、最终定义</h2>
-      <p>
-        本方案中的“完美”不等于自动爆款，也不等于全自动无人参与。它指的是：素材生产有事实约束，创意变量可归因，部门协作不空转，浏览器后台动作可自动化且可审计，AI 输出可结构化入表，合规风险可阻断，投放数据可回写，胜出经验可沉淀，失败样本可复用。
-      </p>
-      <p>
-        昊七七烤冷面的最终 AI 爆款素材系统，应当被理解为一套企业操作系统：AI 负责扩展速度和密度，浏览器自动化负责减少重复网页劳动，飞书负责承载状态和证据，人负责经营责任和边界判断。
-      </p>
-    </section>
-  </section>
+  <div class="swimlane-board swimlane-board--expanded report-chart">
+    <div class="time-ruler">
+      <div class="lane-label ruler-label">小组</div>
+      <div class="ruler-grid">
+        <div v-for="tick in timelineScale" :key="tick.label" class="time-tick">
+          <strong>{{ tick.label }}</strong>
+          <span>{{ tick.note }}</span>
+        </div>
+      </div>
+    </div>
+    <article v-for="lane in expandedTimeline" :key="`${lane.phase}-${lane.group}`" class="swimlane-row">
+      <div class="lane-label">
+        <em>{{ lane.phase }}</em>
+        <strong>{{ lane.group }}</strong>
+        <span>{{ lane.duty }}</span>
+      </div>
+      <div class="lane-track">
+        <div
+          v-for="bar in lane.bars"
+          :key="`${lane.group}-${bar.label}`"
+          class="lane-bar"
+          :class="`lane-bar--${bar.type}`"
+          :style="barStyle(bar)"
+        >
+          <strong>{{ bar.label }}</strong>
+          <span>{{ bar.output }}</span>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="swimlane-legend">
+    <span><i class="legend-work"></i>部门执行</span>
+    <span><i class="legend-ai"></i>AI 辅助</span>
+    <span><i class="legend-review"></i>人工审核</span>
+    <span><i class="legend-data"></i>数据回收</span>
+    <span><i class="legend-decision"></i>经营决策</span>
+  </div>
 </template>

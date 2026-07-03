@@ -618,10 +618,13 @@
 }
 
 .ai-war-room.report-layout {
+  box-sizing: border-box;
+  width: 100%;
   max-width: 1120px;
   margin: 0 auto;
   padding: 8px 0 48px;
   color: var(--ops-ink);
+  overflow-x: hidden;
 }
 
 .report-header {
@@ -654,8 +657,37 @@
   line-height: 1.85;
 }
 
+.report-method {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 22px 0 0;
+  border-top: 1px solid var(--ops-line);
+  border-left: 1px solid var(--ops-line);
+}
+
+.report-method div {
+  border-right: 1px solid var(--ops-line);
+  border-bottom: 1px solid var(--ops-line);
+  padding: 12px 14px;
+}
+
+.report-method dt {
+  margin: 0 0 6px;
+  color: var(--ops-ink);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.report-method dd {
+  margin: 0;
+  color: var(--ops-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 .report-section {
   margin-top: 34px;
+  overflow-x: auto;
 }
 
 .report-section h2 {
@@ -669,7 +701,8 @@
 }
 
 .report-table {
-  width: 100%;
+  width: max(100%, 760px);
+  max-width: none;
   margin-top: 14px;
   border-collapse: collapse;
   border: 1px solid var(--ops-line);
@@ -700,6 +733,20 @@
   font-weight: 650;
 }
 
+.experiment-table {
+  width: max(100%, 1180px);
+}
+
+.experiment-table th,
+.experiment-table td {
+  min-width: 140px;
+}
+
+.report-note {
+  border-left: 3px solid var(--vp-c-brand-2);
+  padding-left: 12px;
+}
+
 .field-list {
   display: flex;
   flex-wrap: wrap;
@@ -726,6 +773,7 @@
 }
 
 .swimlane-board {
+  max-width: 100%;
   overflow-x: auto;
   border: 1px solid var(--ops-line);
   border-radius: 8px;
@@ -758,6 +806,16 @@
 .lane-track {
   display: grid;
   grid-template-columns: repeat(8, minmax(95px, 1fr));
+}
+
+.swimlane-board--expanded .time-ruler,
+.swimlane-board--expanded .swimlane-row {
+  grid-template-columns: 210px minmax(980px, 1fr);
+}
+
+.swimlane-board--expanded .ruler-grid,
+.swimlane-board--expanded .lane-track {
+  grid-template-columns: repeat(10, minmax(98px, 1fr));
 }
 
 .ruler-label {
@@ -809,6 +867,15 @@
   line-height: 1.35;
 }
 
+.lane-label em {
+  display: block;
+  margin: 0 0 5px;
+  color: var(--vp-c-brand-1);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+}
+
 .lane-label span {
   display: block;
   margin-top: 6px;
@@ -828,6 +895,17 @@
       transparent calc(12.5% - 1px),
       var(--ops-line) calc(12.5% - 1px),
       var(--ops-line) 12.5%
+    );
+}
+
+.swimlane-board--expanded .lane-track {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent calc(10% - 1px),
+      var(--ops-line) calc(10% - 1px),
+      var(--ops-line) 10%
     );
 }
 
@@ -922,10 +1000,8 @@
 }
 
 @media (max-width: 1080px) {
-  .report-table {
-    display: block;
-    overflow-x: auto;
-    white-space: normal;
+  .report-method {
+    grid-template-columns: 1fr;
   }
 }
 

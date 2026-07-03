@@ -261,14 +261,14 @@ function writeIndex() {
     '  tagline: 用结构化流程、资料地图和 Vue 可视化组件，把散落的运营经验变成可执行的团队资产。',
     '  actions:',
     '    - theme: brand',
-    '      text: AI 素材作战',
+    '      text: 第一轮执行闭环',
+    '      link: /ai-material-execution-loop',
+    '    - theme: alt',
+    '      text: AI 研究草案',
     '      link: /ai-material-war-room',
     '    - theme: alt',
     '      text: 进入知识地图',
     '      link: /sop/product-test',
-    '    - theme: alt',
-    '      text: 查看组织流程',
-    '      link: /org/process-system',
     '---',
     '',
     '<OpsDashboard />',
@@ -282,6 +282,10 @@ function sidebarGroups(generated) {
     {
       text: 'AI 素材作战',
       items: [
+        {
+          text: '第一轮最小可执行闭环',
+          link: '/ai-material-execution-loop'
+        },
         {
           text: '爆款素材工作流雏形',
           link: '/ai-material-war-room'
@@ -298,7 +302,8 @@ function sidebarGroups(generated) {
 function navItems() {
   return [
     { text: '作战台', link: '/' },
-    { text: 'AI 素材作战', link: '/ai-material-war-room' },
+    { text: 'AI 执行闭环', link: '/ai-material-execution-loop' },
+    { text: 'AI 研究草案', link: '/ai-material-war-room' },
     { text: '测款测图', link: '/sop/product-test' },
     { text: '增长优化', link: '/growth/click-rate' },
     { text: '团队体系', link: '/team/department-kb' },

@@ -3,6 +3,10 @@ export const sidebar = [
     "text": "AI 素材作战",
     "items": [
       {
+        "text": "第一轮最小可执行闭环",
+        "link": "/ai-material-execution-loop"
+      },
+      {
         "text": "爆款素材工作流雏形",
         "link": "/ai-material-war-room"
       }
@@ -78,7 +82,11 @@ export const nav = [
     "link": "/"
   },
   {
-    "text": "AI 素材作战",
+    "text": "AI 执行闭环",
+    "link": "/ai-material-execution-loop"
+  },
+  {
+    "text": "AI 研究草案",
     "link": "/ai-material-war-room"
   },
   {

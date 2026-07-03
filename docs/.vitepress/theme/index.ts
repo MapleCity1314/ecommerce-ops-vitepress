@@ -8,6 +8,7 @@ import DocHero from './components/DocHero.vue'
 import RelatedDocs from './components/RelatedDocs.vue'
 import ImageGallery from './components/ImageGallery.vue'
 import AIMaterialWarRoom from './components/AIMaterialWarRoom.vue'
+import AIMaterialExecutionLoop from './components/AIMaterialExecutionLoop.vue'
 
 export default {
   extends: DefaultTheme,
@@ -19,5 +20,6 @@ export default {
     app.component('RelatedDocs', RelatedDocs)
     app.component('ImageGallery', ImageGallery)
     app.component('AIMaterialWarRoom', AIMaterialWarRoom)
+    app.component('AIMaterialExecutionLoop', AIMaterialExecutionLoop)
   }
 } satisfies Theme

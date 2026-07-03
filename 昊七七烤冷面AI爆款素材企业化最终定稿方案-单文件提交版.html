@@ -62,8 +62,8 @@
 
     .report-shell {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(380px, 30vw);
-      gap: 28px;
+      grid-template-columns: minmax(0, 1fr) 12px minmax(380px, var(--aside-width, 30vw));
+      gap: 18px;
       align-items: start;
     }
 
@@ -77,6 +77,50 @@
       top: 18px;
       min-width: 0;
       height: calc(100vh - 36px);
+    }
+
+    .resize-handle {
+      position: sticky;
+      top: 18px;
+      height: calc(100vh - 36px);
+      cursor: col-resize;
+      touch-action: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    .resize-handle::before {
+      content: "";
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #c3cad6 18%, #c3cad6 82%, transparent);
+    }
+
+    .resize-handle::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 54px;
+      border: 1px solid #c7ced9;
+      background: #fbfbf8;
+      box-shadow: 0 1px 3px rgba(24, 33, 47, 0.08);
+    }
+
+    .resize-handle span {
+      position: relative;
+      z-index: 1;
+      width: 2px;
+      height: 28px;
+      border-left: 1px solid #7f8998;
+      border-right: 1px solid #7f8998;
+      pointer-events: none;
+    }
+
+    body.resizing-report {
+      cursor: col-resize;
+      user-select: none;
     }
 
     .report-cover {
@@ -353,6 +397,10 @@
 
       .report-shell {
         grid-template-columns: 1fr;
+      }
+
+      .resize-handle {
+        display: none;
       }
 
       .timeline-aside {
@@ -1476,6 +1524,10 @@
     </section>
       </div>
 
+      <div class="resize-handle" id="layoutResizeHandle" role="separator" aria-orientation="vertical" aria-label="调整正文与图表宽度" title="拖动调整正文与图表宽度">
+        <span aria-hidden="true"></span>
+      </div>
+
       <aside class="timeline-aside" aria-label="多部门时序图">
         <div class="canvas-wrap">
           <div class="canvas-title">
@@ -1498,8 +1550,12 @@
 
   <script>
     (function () {
+      const shell = document.querySelector('.report-shell');
+      const handle = document.getElementById('layoutResizeHandle');
+      const aside = document.querySelector('.timeline-aside');
       const canvas = document.getElementById('workflowCanvas');
       const ctx = canvas.getContext('2d');
+      const storageKey = 'hq77-report-aside-width';
       const colors = {
         work: '#2f7a5f',
         ai: '#6f5a9d',
@@ -1636,6 +1692,79 @@
         draw();
       }
 
+      function clamp(value, min, max) {
+        return Math.min(max, Math.max(min, value));
+      }
+
+      function isWideLayout() {
+        return window.matchMedia('(min-width: 881px)').matches;
+      }
+
+      function getAsideBounds() {
+        const shellRect = shell.getBoundingClientRect();
+        const min = 360;
+        const max = Math.max(420, Math.min(760, shellRect.width * 0.52));
+        return { min, max };
+      }
+
+      function setAsideWidth(width, persist) {
+        if (!isWideLayout()) {
+          shell.style.removeProperty('--aside-width');
+          return;
+        }
+        const bounds = getAsideBounds();
+        const next = clamp(width, bounds.min, bounds.max);
+        shell.style.setProperty('--aside-width', `${Math.round(next)}px`);
+        if (persist) {
+          localStorage.setItem(storageKey, String(Math.round(next)));
+        }
+        resize();
+      }
+
+      function restoreAsideWidth() {
+        const saved = Number(localStorage.getItem(storageKey));
+        if (Number.isFinite(saved) && saved > 0) {
+          setAsideWidth(saved, false);
+        } else {
+          resize();
+        }
+      }
+
+      function initResizeHandle() {
+        let dragging = false;
+
+        handle.addEventListener('pointerdown', (event) => {
+          if (!isWideLayout()) return;
+          dragging = true;
+          handle.setPointerCapture(event.pointerId);
+          document.body.classList.add('resizing-report');
+          event.preventDefault();
+        });
+
+        handle.addEventListener('pointermove', (event) => {
+          if (!dragging || !isWideLayout()) return;
+          const shellRect = shell.getBoundingClientRect();
+          const nextWidth = shellRect.right - event.clientX - 18;
+          setAsideWidth(nextWidth, false);
+        });
+
+        function stop(event) {
+          if (!dragging) return;
+          dragging = false;
+          document.body.classList.remove('resizing-report');
+          try {
+            handle.releasePointerCapture(event.pointerId);
+          } catch (error) {
+            // Pointer capture can already be released by the browser.
+          }
+          const width = aside.getBoundingClientRect().width;
+          setAsideWidth(width, true);
+        }
+
+        handle.addEventListener('pointerup', stop);
+        handle.addEventListener('pointercancel', stop);
+      }
+
       function roundRect(x, y, w, h, r) {
         const rr = Math.min(r, w / 2, h / 2);
         ctx.beginPath();
@@ -1748,8 +1877,9 @@
         ctx.stroke();
       }
 
-      resize();
-      window.addEventListener('resize', resize);
+      initResizeHandle();
+      restoreAsideWidth();
+      window.addEventListener('resize', restoreAsideWidth);
     })();
   </script>
 </body>

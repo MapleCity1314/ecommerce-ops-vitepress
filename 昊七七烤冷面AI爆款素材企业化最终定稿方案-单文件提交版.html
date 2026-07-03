@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>昊七七烤冷面 AI 爆款素材企业化最终定稿方案｜单文件提交版</title>
+  <title>昊七七烤冷面 AI 爆款素材企业化最终定稿方案</title>
   <style>
     :root {
       color-scheme: light;
@@ -55,9 +55,28 @@
     }
 
     .page {
-      max-width: 1240px;
+      max-width: 1760px;
       margin: 0 auto;
       padding: 42px 32px 72px;
+    }
+
+    .report-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(380px, 30vw);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .report-main {
+      min-width: 0;
+      max-width: 1080px;
+    }
+
+    .timeline-aside {
+      position: sticky;
+      top: 18px;
+      min-width: 0;
+      height: calc(100vh - 36px);
     }
 
     .report-cover {
@@ -123,7 +142,7 @@
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
       padding: 16px 0;
-      columns: 2;
+      columns: 1;
       column-gap: 44px;
     }
 
@@ -252,12 +271,15 @@
     }
 
     .canvas-wrap {
-      margin: 18px 0 12px;
+      margin: 0;
       border: 1px solid var(--line);
       background:
         linear-gradient(180deg, rgba(255,255,255,0.94), rgba(250,251,249,0.94)),
         repeating-linear-gradient(90deg, rgba(31,93,143,0.06), rgba(31,93,143,0.06) 1px, transparent 1px, transparent 88px);
-      padding: 14px;
+      padding: 12px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
     .canvas-title {
@@ -266,24 +288,25 @@
       justify-content: space-between;
       gap: 18px;
       border-bottom: 1px solid var(--line);
-      padding-bottom: 10px;
-      margin-bottom: 12px;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .canvas-title strong {
-      font-size: 17px;
+      font-size: 15px;
     }
 
     .canvas-title span {
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
     }
 
     canvas {
       display: block;
       width: 100%;
-      height: min(72vh, 760px);
-      min-height: 560px;
+      height: auto;
+      min-height: 0;
+      flex: 1;
       background: #fcfcfa;
     }
 
@@ -294,8 +317,8 @@
       color: var(--muted);
       font-size: 13px;
       border-top: 1px solid var(--line);
-      padding-top: 10px;
-      margin-top: 10px;
+      padding-top: 8px;
+      margin-top: 8px;
     }
 
     .legend i {
@@ -323,17 +346,19 @@
       margin: 6px 0;
     }
 
-    .definition {
-      border-top: 3px solid var(--ink);
-      border-bottom: 3px solid var(--ink);
-      padding: 20px 0;
-      margin-top: 24px;
-      font-size: 16px;
-    }
-
     @media (max-width: 880px) {
       .page {
         padding: 28px 18px 60px;
+      }
+
+      .report-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-aside {
+        position: static;
+        height: 680px;
+        order: -1;
       }
 
       h1 {
@@ -359,7 +384,7 @@
       }
 
       canvas {
-        min-height: 620px;
+        min-height: 0;
       }
     }
 
@@ -406,10 +431,10 @@
 <body>
   <main class="page">
     <header class="report-cover">
-      <p class="kicker">昊七七烤冷面 / AI 爆款素材企业化系统 / 单文件提交版</p>
+      <p class="kicker">昊七七烤冷面 / AI 爆款素材企业化系统 / 最终定稿</p>
       <h1>以 AI Agent、飞书数字员工与浏览器自动化驱动的爆款素材产出工作流最终定稿方案</h1>
       <p class="subtitle">
-        本文件是可直接提交的一份完整文件：正文、表格、参考资料、Canvas 时序示意图、动画脚本与打印样式全部内嵌，不依赖 Vue 组件、GitHub Pages、外部图片、外部 CSS 或外部 JavaScript。
+        本方案面向昊七七烤冷面电商团队的真实经营场景，围绕素材实验、封面入口、短视频生产、投放验证、数据回写、合规审核和多部门协作，建立一套可执行、可追踪、可复盘的企业化工作流。
       </p>
       <dl class="meta-grid">
         <div>
@@ -425,70 +450,35 @@
           <dd>2026-07-03</dd>
         </div>
         <div>
-          <dt>提交形式</dt>
-          <dd>单个 HTML 文件，可离线打开</dd>
+          <dt>研究边界</dt>
+          <dd>待验证假设，不虚构业务数据</dd>
         </div>
       </dl>
     </header>
 
+    <div class="report-shell">
+      <div class="report-main">
     <nav class="toc" aria-label="目录">
-      <a href="#merge"><span>01</span>合并策略与交付结论</a>
-      <a href="#abstract"><span>02</span>摘要</a>
-      <a href="#evidence"><span>03</span>研究依据</a>
-      <a href="#principles"><span>04</span>最终原则</a>
-      <a href="#architecture"><span>05</span>系统总架构</a>
-      <a href="#canvas"><span>06</span>Canvas 多部门时序图</a>
-      <a href="#workflow"><span>07</span>最终工作流</a>
-      <a href="#experiments"><span>08</span>实验矩阵</a>
-      <a href="#cover"><span>09</span>封面生成协议</a>
-      <a href="#ai-boundary"><span>10</span>AI 替代与加速边界</a>
-      <a href="#browser"><span>11</span>浏览器自动化/RPA</a>
-      <a href="#agents"><span>12</span>数字员工编队</a>
-      <a href="#feishu"><span>13</span>飞书数据底座</a>
-      <a href="#gates"><span>14</span>人审与安全门</a>
-      <a href="#decision"><span>15</span>数据决策规则</a>
-      <a href="#launch"><span>16</span>落地顺序</a>
-      <a href="#sources"><span>17</span>参考资料</a>
+      <a href="#abstract"><span>01</span>摘要</a>
+      <a href="#evidence"><span>02</span>研究依据</a>
+      <a href="#principles"><span>03</span>最终原则</a>
+      <a href="#architecture"><span>04</span>系统总架构</a>
+      <a href="#timeline"><span>05</span>多维时序图</a>
+      <a href="#workflow"><span>06</span>最终工作流</a>
+      <a href="#experiments"><span>07</span>实验矩阵</a>
+      <a href="#cover"><span>08</span>封面生成协议</a>
+      <a href="#ai-boundary"><span>09</span>AI 替代与加速边界</a>
+      <a href="#browser"><span>10</span>浏览器自动化/RPA</a>
+      <a href="#agents"><span>11</span>数字员工编队</a>
+      <a href="#feishu"><span>12</span>飞书数据底座</a>
+      <a href="#gates"><span>13</span>人审与安全门</a>
+      <a href="#decision"><span>14</span>数据决策规则</a>
+      <a href="#launch"><span>15</span>落地顺序</a>
+      <a href="#sources"><span>16</span>参考资料</a>
     </nav>
 
-    <section id="merge">
-      <h2>一、合并策略与交付结论</h2>
-      <p class="lead">
-        如果最终只能提交一份文件，最合理的解决方案不是把三份站内 Markdown 附在一起，也不是提交依赖 Vue 组件的页面，而是把研究草案、执行修复版和最终蓝图合并为一个自包含 HTML 报告。HTML 可以同时承载报告正文、可滚动表格、参考链接、交互式 Canvas 时序图和打印样式；交付时只需要提交本文件。
-      </p>
-      <table>
-        <thead>
-          <tr>
-            <th>原研究产物</th>
-            <th>保留价值</th>
-            <th>进入本单文件的方式</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>AI 爆款素材企业化工作流研究草案</td>
-            <td>覆盖多部门协作、实验分组、封面变量、飞书表结构、Agent 编队和长期系统。</td>
-            <td>保留为本文件的系统架构、实验矩阵、部门责任和封面协议。</td>
-          </tr>
-          <tr>
-            <td>第一轮最小可执行闭环</td>
-            <td>修复变量过多、部门空转、字段不细、Agent 边界不硬、食品合规颗粒度不足等问题。</td>
-            <td>保留为本文件的启动顺序、字段字典、状态流、安全门和第一轮执行口径。</td>
-          </tr>
-          <tr>
-            <td>最终蓝图网页版本</td>
-            <td>补充 AI 可替代能力、浏览器自动化、RPA、Computer Use、Playwright、人审边界和数字员工编队。</td>
-            <td>保留为本文件的自动化权限矩阵、浏览器自动化场景、Agent 责任边界和企业化定义。</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="note">
-        结论：最终提交物应使用本文件，而不是提交站点页面。站点页面适合在线阅读和迭代；本文件适合离线提交、内部评审和归档。
-      </p>
-    </section>
-
     <section id="abstract">
-      <h2>二、摘要</h2>
+      <h2>一、摘要</h2>
       <p>
         本方案的最终目标不是“用 AI 写几条爆款脚本”，而是为昊七七烤冷面建立一套企业级素材实验操作系统：让信息进入、事实确认、创意生产、封面实验、浏览器巡检、投放验证、数据回写、复盘入库形成连续闭环。
       </p>
@@ -511,7 +501,7 @@
     </section>
 
     <section id="evidence">
-      <h2>三、研究依据</h2>
+      <h2>二、研究依据</h2>
       <p>
         本轮依据以官方文档和监管资料为主，并把外部依据转译为可执行约束。外部依据只证明方法合理，不证明昊七七烤冷面的具体素材必然有效。
       </p>
@@ -598,7 +588,7 @@
     </section>
 
     <section id="principles">
-      <h2>四、最终原则</h2>
+      <h2>三、最终原则</h2>
       <table>
         <thead>
           <tr>
@@ -632,7 +622,7 @@
     </section>
 
     <section id="architecture">
-      <h2>五、系统总架构</h2>
+      <h2>四、系统总架构</h2>
       <p>
         最终系统不按“视频部门单点生产”设计，而按七个能力层设计。每一层都有明确输入、自动化能力和业务输出。AI 与浏览器自动化不是独立玩具，而是嵌入数据底座和业务流程的生产能力。
       </p>
@@ -694,26 +684,11 @@
       </div>
     </section>
 
-    <section id="canvas">
-      <h2>六、Canvas 多部门时序图：一份工作开启后各小组如何推进</h2>
+    <section id="timeline">
+      <h2>五、多维时序图：一份工作开启后各小组如何推进</h2>
       <p>
-        下图由本文件内置 Canvas 绘制。横轴是一个素材实验启动后的相对时间，纵轴是部门/数字员工泳道。条形表示任务持续时间，箭头表示前后依赖，箭头上的流光表示信息、素材或决策在组织内流动。它不是排班表，而是工作推进关系图：哪些动作可以并行，哪些动作必须等待事实包、审核或数据回写。
+        请查看右侧图表。该图展示单个素材实验启动后，运营、供应链、客服、工厂、AI Agent、设计、视频、浏览器自动化、合规、投放、数据等小组如何并行推进，以及哪些环节会因为事实包、审核、投放数据或履约风险而形成阻塞。
       </p>
-      <div class="canvas-wrap">
-        <div class="canvas-title">
-          <strong>昊七七烤冷面 AI 素材实验多维时序示意图</strong>
-          <span>Canvas 动态绘制；打印或截图时仍保留静态结构</span>
-        </div>
-        <canvas id="workflowCanvas" aria-label="多部门时序工作示意图"></canvas>
-        <div class="legend">
-          <span><i class="work"></i>部门执行</span>
-          <span><i class="ai"></i>AI 辅助</span>
-          <span><i class="auto"></i>浏览器自动化</span>
-          <span><i class="review"></i>人工审核</span>
-          <span><i class="data"></i>数据回写</span>
-          <span><i class="decision"></i>经营决策</span>
-        </div>
-      </div>
       <p class="small">
         关键读法：AI Agent 在事实包确认前可以做情报整理和候选生成草稿，但不能进入发布稿；设计/视频可以并行制作，但发布前必须经过合规与事实复核；投放后台可由浏览器自动化预填，最终发布和预算由人点击确认；数据回写、评论监控、供应链承接必须同步观察。
       </p>
@@ -756,7 +731,7 @@
     </section>
 
     <section id="workflow">
-      <h2>七、最终工作流</h2>
+      <h2>六、最终工作流</h2>
       <p>
         一份素材实验从情报进入到规则入库共十个动作。浏览器自动化被放入流程中，但只承担巡检、下载、截图、核对和预填，不拥有发布和放量权。
       </p>
@@ -859,7 +834,7 @@
     </section>
 
     <section id="experiments">
-      <h2>八、实验矩阵</h2>
+      <h2>七、实验矩阵</h2>
       <p>
         第一轮真实执行时，建议把五类变量拆开验证。封面入口、前 3 秒钩子、视频叙事、商品/链接承接、投放归因分别回答不同问题。不要用一条素材同时改封面、改脚本、改价格、改人群、改投放计划，否则无法归因。
       </p>
@@ -934,7 +909,7 @@
     </section>
 
     <section id="cover">
-      <h2>九、封面生成协议</h2>
+      <h2>八、封面生成协议</h2>
       <p>
         封面必须作为独立实验变量，不应只是视频截图。封面的任务是形成准确的入口承诺，并让视频开头立刻兑现。每个封面版本都要记录标题、主体、构图、利益点、审核风险和数据结果。
       </p>
@@ -992,7 +967,7 @@
     </section>
 
     <section id="ai-boundary">
-      <h2>十、AI 替代与加速边界</h2>
+      <h2>九、AI 替代与加速边界</h2>
       <p>
         更抽象地看，AI 替代的不是“部门责任”，而是部门内部可重复、可结构化、低风险的信息劳动。AI 可以让每个部门从手工整理、重复填写和低价值搜索中释放出来，但不能替代经营责任和法律责任。
       </p>
@@ -1049,7 +1024,7 @@
     </section>
 
     <section id="browser">
-      <h2>十一、浏览器自动化/RPA/Computer Use 能力清单</h2>
+      <h2>十、浏览器自动化/RPA/Computer Use 能力清单</h2>
       <p>
         浏览器自动化适合处理网页后台里重复、可记录、可回滚或只读的动作。对于不稳定 UI、强账号权限、最终发布、付款、删除、放量和授权动作，只能作为人审前辅助。
       </p>
@@ -1116,7 +1091,7 @@
     </section>
 
     <section id="agents">
-      <h2>十二、数字员工编队</h2>
+      <h2>十一、数字员工编队</h2>
       <p>
         数字员工不是代替部门，而是把部门输入转成可扩展、可追踪、可复盘的结构化产物。每个 Agent 必须有输入、工具、输出位置、禁止动作和人审节点。
       </p>
@@ -1187,7 +1162,7 @@
     </section>
 
     <section id="feishu">
-      <h2>十三、飞书数据底座</h2>
+      <h2>十二、飞书数据底座</h2>
       <p>
         最终方案必须落在表结构和状态流上。没有数据底座，AI 只能产出零散内容，无法形成企业资产。建议至少建立七张表，并通过关联字段、状态字段、审核记录和自动化触发器连接。
       </p>
@@ -1301,7 +1276,7 @@
     </section>
 
     <section id="gates">
-      <h2>十四、人审与安全门</h2>
+      <h2>十三、人审与安全门</h2>
       <table>
         <thead>
           <tr>
@@ -1385,7 +1360,7 @@
     </section>
 
     <section id="decision">
-      <h2>十五、数据决策规则</h2>
+      <h2>十四、数据决策规则</h2>
       <p>
         素材复盘会只允许输出五类结论：继续观察、淘汰、二创、放量、合规暂停。任何结论都必须绑定实验编号、变量、样本量、指标和下一步动作。
       </p>
@@ -1438,7 +1413,7 @@
     </section>
 
     <section id="launch">
-      <h2>十六、落地顺序</h2>
+      <h2>十五、落地顺序</h2>
       <p>
         落地时不要一开始就给浏览器自动化过高权限。先让系统能记录、能提醒、能下载、能截图、能预填，再逐步扩大自动化范围。更快的方式不是跳过人审，而是减少人审前的无效准备时间。
       </p>
@@ -1478,13 +1453,10 @@
           </tr>
         </tbody>
       </table>
-      <div class="definition">
-        最终定义：昊七七烤冷面的 AI 爆款素材系统，应被理解为一套企业操作系统。AI 负责扩展速度和密度，浏览器自动化负责减少重复网页劳动，飞书负责承载状态和证据，人负责经营责任和边界判断。
-      </div>
     </section>
 
     <section id="sources">
-      <h2>十七、参考资料</h2>
+      <h2>十六、参考资料</h2>
       <ul class="source-list">
         <li><a href="https://ads.tiktok.com/help/article/creative-best-practices" target="_blank" rel="noreferrer">TikTok Creative Best Practices</a></li>
         <li><a href="https://ads.tiktok.com/help/article/split-testing?lang=en" target="_blank" rel="noreferrer">TikTok Split Testing</a></li>
@@ -1502,6 +1474,26 @@
         <li><a href="https://dgamr.dg.gov.cn/gkmlpt/content/4/4332/post_4332869.html" target="_blank" rel="noreferrer">东莞市市场监督管理局：食品广告合规指引</a></li>
       </ul>
     </section>
+      </div>
+
+      <aside class="timeline-aside" aria-label="多部门时序图">
+        <div class="canvas-wrap">
+          <div class="canvas-title">
+            <strong>多部门推进时序</strong>
+            <span>素材实验启动后的相对时间</span>
+          </div>
+          <canvas id="workflowCanvas" aria-label="多部门时序工作示意图"></canvas>
+          <div class="legend">
+            <span><i class="work"></i>部门执行</span>
+            <span><i class="ai"></i>AI 辅助</span>
+            <span><i class="auto"></i>浏览器自动化</span>
+            <span><i class="review"></i>人工审核</span>
+            <span><i class="data"></i>数据回写</span>
+            <span><i class="decision"></i>经营决策</span>
+          </div>
+        </div>
+      </aside>
+    </div>
   </main>
 
   <script>
@@ -1635,31 +1627,13 @@
         }
       ];
 
-      const arrows = [
-        ['运营研究组', '供应链/品控', 1.1, '事实包'],
-        ['供应链/品控', 'AI Agent 编队', 2.4, '事实约束'],
-        ['客服洞察组', 'AI Agent 编队', 2.2, '用户原话'],
-        ['工厂/仓库素材组', '视频制作组', 3.8, '真实画面'],
-        ['AI Agent 编队', '封面/设计组', 4.0, '候选'],
-        ['AI Agent 编队', '视频制作组', 4.2, '分镜'],
-        ['封面/设计组', '合规/负责人', 5.8, '封面送审'],
-        ['视频制作组', '合规/负责人', 6.0, '成片送审'],
-        ['浏览器自动化', '合规/负责人', 6.1, '核对证据'],
-        ['合规/负责人', '投放/渠道组', 6.8, '放行'],
-        ['投放/渠道组', '数据/知识库组', 8.2, '数据回写'],
-        ['数据/知识库组', '运营研究组', 9.2, '决策回流']
-      ];
-
       function resize() {
         const rect = canvas.getBoundingClientRect();
         const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
         canvas.width = Math.floor(rect.width * dpr);
         canvas.height = Math.floor(rect.height * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-
-      function laneIndex(name) {
-        return lanes.findIndex(lane => lane.name === name);
+        draw();
       }
 
       function roundRect(x, y, w, h, r) {
@@ -1695,67 +1669,24 @@
         lines.forEach((item, index) => ctx.fillText(item, x, y + index * lineHeight));
       }
 
-      function drawArrow(x1, y1, x2, y2, label, time) {
-        const midX = (x1 + x2) / 2;
-        const bend = Math.abs(y2 - y1) > 42 ? Math.max(20, Math.min(70, Math.abs(y2 - y1) * 0.24)) : 22;
-        const c1x = midX - bend;
-        const c2x = midX + bend;
-        ctx.save();
-        ctx.strokeStyle = 'rgba(31, 93, 143, 0.42)';
-        ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.bezierCurveTo(c1x, y1, c2x, y2, x2, y2);
-        ctx.stroke();
-
-        const angle = Math.atan2(y2 - y1, x2 - c2x);
-        ctx.fillStyle = 'rgba(31, 93, 143, 0.72)';
-        ctx.beginPath();
-        ctx.moveTo(x2, y2);
-        ctx.lineTo(x2 - 8 * Math.cos(angle - 0.45), y2 - 8 * Math.sin(angle - 0.45));
-        ctx.lineTo(x2 - 8 * Math.cos(angle + 0.45), y2 - 8 * Math.sin(angle + 0.45));
-        ctx.closePath();
-        ctx.fill();
-
-        const p = (time * 0.00018 + (x1 + y1) * 0.0007) % 1;
-        const qx = cubic(x1, c1x, c2x, x2, p);
-        const qy = cubic(y1, y1, y2, y2, p);
-        const glow = ctx.createRadialGradient(qx, qy, 0, qx, qy, 22);
-        glow.addColorStop(0, 'rgba(30, 145, 190, 0.92)');
-        glow.addColorStop(0.36, 'rgba(255, 255, 255, 0.72)');
-        glow.addColorStop(1, 'rgba(30, 145, 190, 0)');
-        ctx.fillStyle = glow;
-        ctx.beginPath();
-        ctx.arc(qx, qy, 22, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = 'rgba(31, 33, 47, 0.74)';
-        ctx.font = '11px Microsoft YaHei, Arial';
-        ctx.fillText(label, midX + 8, (y1 + y2) / 2 - 4);
-        ctx.restore();
-      }
-
-      function cubic(a, b, c, d, t) {
-        const mt = 1 - t;
-        return mt * mt * mt * a + 3 * mt * mt * t * b + 3 * mt * t * t * c + t * t * t * d;
-      }
-
-      function draw(time) {
+      function draw() {
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
         ctx.clearRect(0, 0, width, height);
 
-        const left = width < 760 ? 118 : 180;
-        const right = 24;
-        const top = 54;
-        const bottom = 26;
+        const compact = width < 620;
+        const left = compact ? 96 : 132;
+        const right = 12;
+        const top = 46;
+        const bottom = 16;
         const plotW = width - left - right;
         const laneH = (height - top - bottom) / lanes.length;
-        const barH = Math.min(34, laneH * 0.56);
+        const barH = Math.max(16, Math.min(25, laneH * 0.48));
 
         ctx.fillStyle = '#fcfcfa';
         ctx.fillRect(0, 0, width, height);
 
-        ctx.font = '12px Microsoft YaHei, Arial';
+        ctx.font = compact ? '10px Microsoft YaHei, Arial' : '11px Microsoft YaHei, Arial';
         ctx.textAlign = 'center';
         ticks.forEach((tick, index) => {
           const x = left + (plotW * index) / (ticks.length - 1);
@@ -1766,11 +1697,13 @@
           ctx.lineTo(x, height - bottom);
           ctx.stroke();
           ctx.fillStyle = colors.ink;
-          ctx.font = '700 12px Microsoft YaHei, Arial';
+          ctx.font = compact ? '700 9px Microsoft YaHei, Arial' : '700 11px Microsoft YaHei, Arial';
           ctx.fillText(tick[0], x, 18);
           ctx.fillStyle = colors.muted;
-          ctx.font = '11px Microsoft YaHei, Arial';
-          ctx.fillText(tick[1], x, 36);
+          ctx.font = compact ? '9px Microsoft YaHei, Arial' : '10px Microsoft YaHei, Arial';
+          if (!compact || index % 2 === 0) {
+            ctx.fillText(tick[1], x, 34);
+          }
         });
 
         ctx.textAlign = 'left';
@@ -1786,51 +1719,25 @@
           ctx.fillRect(0, y, width, laneH);
 
           ctx.fillStyle = colors.ink;
-          ctx.font = '700 12px Microsoft YaHei, Arial';
-          wrapText(lane.name, 12, y + 19, left - 24, 15, 1);
+          ctx.font = compact ? '700 10px Microsoft YaHei, Arial' : '700 11px Microsoft YaHei, Arial';
+          wrapText(lane.name, 10, y + 17, left - 18, 13, 1);
           ctx.fillStyle = colors.muted;
-          ctx.font = '11px Microsoft YaHei, Arial';
-          wrapText(lane.duty, 12, y + 36, left - 24, 14, 2);
+          ctx.font = compact ? '9px Microsoft YaHei, Arial' : '10px Microsoft YaHei, Arial';
+          wrapText(lane.duty, 10, y + 31, left - 18, 12, compact ? 1 : 2);
 
           lane.bars.forEach((bar) => {
             const x = left + (plotW * bar.start) / 10;
             const x2 = left + (plotW * bar.end) / 10;
             const w = Math.max(42, x2 - x);
             const by = y + (laneH - barH) / 2;
-            ctx.shadowColor = 'rgba(24, 33, 47, 0.12)';
-            ctx.shadowBlur = 3;
-            ctx.shadowOffsetY = 1;
             roundRect(x, by, w, barH, 3);
             ctx.fillStyle = colors[bar.type] || colors.work;
             ctx.fill();
-            ctx.shadowColor = 'transparent';
-
-            const shineX = x + ((time * 0.03 + index * 18) % (w + 60)) - 50;
-            const grad = ctx.createLinearGradient(shineX, by, shineX + 50, by);
-            grad.addColorStop(0, 'rgba(255,255,255,0)');
-            grad.addColorStop(0.5, 'rgba(255,255,255,0.55)');
-            grad.addColorStop(1, 'rgba(255,255,255,0)');
-            ctx.save();
-            roundRect(x, by, w, barH, 3);
-            ctx.clip();
-            ctx.fillStyle = grad;
-            ctx.fillRect(shineX, by, 50, barH);
-            ctx.restore();
 
             ctx.fillStyle = '#fff';
-            ctx.font = '700 11px Microsoft YaHei, Arial';
-            wrapText(bar.label, x + 7, by + 14, w - 14, 13, 2);
+            ctx.font = compact ? '700 9px Microsoft YaHei, Arial' : '700 10px Microsoft YaHei, Arial';
+            wrapText(bar.label, x + 6, by + 13, w - 12, 12, compact ? 1 : 2);
           });
-        });
-
-        arrows.forEach(([from, to, t, label]) => {
-          const a = laneIndex(from);
-          const b = laneIndex(to);
-          if (a < 0 || b < 0) return;
-          const x = left + (plotW * t) / 10;
-          const y1 = top + a * laneH + laneH * 0.5;
-          const y2 = top + b * laneH + laneH * 0.5;
-          drawArrow(x, y1, x + 34, y2, label, time);
         });
 
         ctx.strokeStyle = colors.ink;
@@ -1839,12 +1746,9 @@
         ctx.moveTo(left, top - 18);
         ctx.lineTo(left, height - bottom);
         ctx.stroke();
-
-        requestAnimationFrame(draw);
       }
 
       resize();
-      requestAnimationFrame(draw);
       window.addEventListener('resize', resize);
     })();
   </script>

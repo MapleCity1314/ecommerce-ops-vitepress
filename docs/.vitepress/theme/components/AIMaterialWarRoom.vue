@@ -334,97 +334,96 @@ const evidence = [
 </script>
 
 <template>
-  <section class="ai-war-room">
-    <div class="war-hero">
-      <div>
-        <p class="war-eyebrow">AI 爆款素材作战系统 / 研究雏形</p>
-        <h1>研究目标：建立一套可被真实执行和复盘的素材实验系统</h1>
-        <p>
-          本稿不是展示页，也不是最终 SOP。它是一份研究底稿：先提出一套可验证的组织与素材生产假设，再把每个部门的输入、封面生成、视频生成、人工审核和数据回写放到同一条工作链路里。
-          对昊七七烤冷面来说，研究重点不是“能不能多做视频”，而是能否稳定制造可解释的素材实验，并把胜出规律沉淀下来。
-        </p>
-      </div>
-      <aside class="war-command">
-        <div>
-          <Target :size="20" />
-          <strong>研究主指标</strong>
-          <span>每周稳定产出可测试素材，并持续提高胜出素材发现率</span>
-        </div>
-        <div>
-          <Workflow :size="20" />
-          <strong>核心载体</strong>
-          <span>飞书多维表格 + 工作流 + Agent 编队 + 人工审核</span>
-        </div>
-        <div>
-          <CheckCircle2 :size="20" />
-          <strong>研究约束</strong>
-          <span>数据只用于判断假设，人负责事实边界，AI 负责扩大候选空间</span>
-        </div>
-      </aside>
-    </div>
+  <section class="ai-war-room report-layout">
+    <header class="report-header">
+      <p class="report-kicker">AI 爆款素材作战系统 / 研究报告雏形</p>
+      <h1>研究目标：建立一套可被真实执行和复盘的素材实验系统</h1>
+      <p>
+        本报告用于研究昊七七烤冷面的视频、封面和素材生产机制，不承担展示宣传功能。当前结论均以“待验证假设”处理：即先定义素材实验应如何被组织、记录、生产、审核和复盘，再通过真实投放数据检验这套机制是否能提升胜出素材发现率。
+      </p>
+      <p>
+        本报告将素材生产拆成三个对象：视频内容、封面入口、链接承接。视频负责说明产品和场景，封面负责争取点击，链接负责把点击转化成收藏、加购和成交。三者必须分别记录变量，否则复盘时无法判断问题发生在哪一层。
+      </p>
+    </header>
 
-    <div class="research-strip">
-      <div v-for="item in evidence" :key="item">
-        <CheckCircle2 :size="16" />
-        <span>{{ item }}</span>
-      </div>
-    </div>
-
-    <section class="war-section">
-      <div class="war-heading">
-        <p class="war-eyebrow">作战闭环</p>
-        <h2>从爆款情报到放量复盘，形成一条不断自我进化的素材流水线</h2>
-      </div>
-      <div class="loop-grid">
-        <article v-for="(step, index) in loopSteps" :key="step.title" class="loop-card">
-          <div class="loop-index">{{ index + 1 }}</div>
-          <component :is="step.icon" :size="22" />
-          <h3>{{ step.title }}</h3>
-          <p>{{ step.subtitle }}</p>
-          <span>{{ step.owner }}</span>
-        </article>
-      </div>
+    <section class="report-section">
+      <h2>一、研究判断摘要</h2>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>研究判断</th>
+            <th>原因</th>
+            <th>验证方式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in evidence" :key="item">
+            <td>{{ item }}</td>
+            <td>该判断影响素材系统的任务拆分和数据字段设计。</td>
+            <td>通过素材实验台记录版本、投放结果和复盘结论。</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
-    <section class="war-section">
-      <div class="war-heading split">
-        <div>
-          <p class="war-eyebrow">部门协同</p>
-          <h2>部门不是等待派单，而是在固定时间点交付固定研究输入</h2>
-        </div>
-        <p>
-          研究假设：如果工厂、供应链、客服、设计、投放都按时间轴交付，素材生产就不会挤压在剪辑端，也不会只依赖运营临时灵感。
-        </p>
-      </div>
-      <div class="dept-grid">
-        <article v-for="dept in departments" :key="dept.name" class="dept-card">
-          <div class="dept-card__title">
-            <component :is="dept.icon" :size="22" />
-            <h3>{{ dept.name }}</h3>
-          </div>
-          <dl>
-            <dt>输入</dt>
-            <dd>{{ dept.input }}</dd>
-            <dt>输出</dt>
-            <dd>{{ dept.output }}</dd>
-            <dt>看板指标</dt>
-            <dd>{{ dept.metric }}</dd>
-          </dl>
-        </article>
-      </div>
+    <section class="report-section">
+      <h2>二、素材实验闭环</h2>
+      <p>
+        素材生产不应以“做完一条视频”为终点，而应以“形成可解释的实验结论”为终点。一次完整实验需要从情报开始，经过假设、素材组件、生产、审核、测试、放量和复盘八个环节。每个环节都必须有明确负责人和可检查输出。
+      </p>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>环节</th>
+            <th>研究目的</th>
+            <th>负责人</th>
+            <th>输出物</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(step, index) in loopSteps" :key="step.title">
+            <td>{{ index + 1 }}</td>
+            <td>{{ step.title }}</td>
+            <td>{{ step.subtitle }}</td>
+            <td>{{ step.owner }}</td>
+            <td>进入下一环节的标准化输入</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
-    <section class="war-section timeline-section">
-      <div class="war-heading split">
-        <div>
-          <p class="war-eyebrow">多维进度时间轴</p>
-          <h2>一份素材实验开启后，各小组在同一时间轴上并行推进</h2>
-        </div>
-        <p>
-          这张图用于研究协同关系，不是排班表。横轴表示任务启动后的推进时间，纵轴表示小组泳道，条块表示该小组正在推进的工作、交付物和依赖点。
-        </p>
-      </div>
-      <div class="swimlane-board">
+    <section class="report-section">
+      <h2>三、部门输入与输出定义</h2>
+      <p>
+        “每个部门都参与”不等于所有部门都做视频。更准确的定义是：每个部门都向素材实验贡献自己掌握的事实、数据或判断。工厂提供真实生产和履约证据，供应链确认可兑现承诺，客服提供用户原话，设计和剪辑把假设转成可测版本，投放用市场数据判断去留。
+      </p>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>部门/小组</th>
+            <th>输入</th>
+            <th>输出</th>
+            <th>建议跟踪指标</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="dept in departments" :key="dept.name">
+            <td>{{ dept.name }}</td>
+            <td>{{ dept.input }}</td>
+            <td>{{ dept.output }}</td>
+            <td>{{ dept.metric }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="report-section">
+      <h2>四、多维进度时间轴</h2>
+      <p>
+        下图采用泳道图表达一份素材实验启动后的推进关系。横轴为任务启动后的时间，纵轴为小组。每一条色块代表某个小组在该时间段推进的任务、交付物或审核节点。它的用途是识别并行关系、前置依赖和潜在等待，而不是做日程排班。
+      </p>
+      <div class="swimlane-board report-chart">
         <div class="time-ruler">
           <div class="lane-label ruler-label">小组</div>
           <div class="ruler-grid">
@@ -462,136 +461,112 @@ const evidence = [
       </div>
     </section>
 
-    <section class="war-section two-col">
-      <div class="agent-panel">
-        <div class="war-heading compact">
-          <p class="war-eyebrow">Agent 编队</p>
-          <h2>把复杂工作拆给一组数字员工</h2>
-        </div>
-        <div class="agent-list">
-          <div v-for="agent in agents" :key="agent[0]">
-            <Bot :size="18" />
-            <strong>{{ agent[0] }}</strong>
-            <span>{{ agent[1] }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="human-panel">
-        <div class="war-heading compact">
-          <p class="war-eyebrow">Human in the loop</p>
-          <h2>人工只卡关键风险点</h2>
-        </div>
-        <div class="gate-list">
-          <div>
-            <ShieldCheck :size="19" />
-            <span>工厂/品控确认产品事实和食品宣传边界</span>
-          </div>
-          <div>
-            <PackageCheck :size="19" />
-            <span>供应链确认库存、价格、交期和活动承诺</span>
-          </div>
-          <div>
-            <Users :size="19" />
-            <span>负责人确认品牌表达和是否允许放量</span>
-          </div>
-          <div>
-            <AlertTriangle :size="19" />
-            <span>客服与售后处理异常评论、退款和质疑反馈</span>
-          </div>
-        </div>
-      </div>
+    <section class="report-section">
+      <h2>五、Agent 编队与人工审核边界</h2>
+      <p>
+        AI Agent 的价值在于扩大候选方向、降低信息整理成本和提高复盘速度，但不能替代事实确认和风险判断。食品类电商尤其要保留人工审核：产品事实、价格库存、食品宣传边界、品牌表达和售后承接都必须由对应负责人确认。
+      </p>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>Agent/角色</th>
+            <th>任务定义</th>
+            <th>人工边界</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="agent in agents" :key="agent[0]">
+            <td>{{ agent[0] }}</td>
+            <td>{{ agent[1] }}</td>
+            <td>仅产出建议或草稿，不直接发布、不直接承诺事实。</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
-    <section class="war-section cover-section">
-      <div class="war-heading split">
-        <div>
-          <p class="war-eyebrow">封面生成研究</p>
-          <h2>封面不是视频截图，而是独立影响点击的实验变量</h2>
-        </div>
-        <p>
-          建议每条核心视频至少配置 3 个封面方向：结果、利益、信任或场景。封面字段必须和视频字段分开记录，否则点击率低时无法判断是封面问题还是内容问题。
-        </p>
-      </div>
-      <div class="cover-grid">
-        <article v-for="item in coverExperiments" :key="item.title" class="cover-card">
-          <Layers3 :size="20" />
-          <h3>{{ item.title }}</h3>
-          <dl>
-            <dt>研究假设</dt>
-            <dd>{{ item.thesis }}</dd>
-            <dt>生成方向</dt>
-            <dd>{{ item.visual }}</dd>
-            <dt>审核风险</dt>
-            <dd>{{ item.risk }}</dd>
-          </dl>
-        </article>
-      </div>
+    <section class="report-section">
+      <h2>六、封面生成研究</h2>
+      <p>
+        封面不是视频截图，而是影响点击的独立变量。建议同一条核心视频至少配置三个封面方向，并分别记录封面标题、主体、构图、利益点、审核风险和封面点击率。若封面点击率低，应先判断标题是否清楚、主体是否突出、场景是否准确；若封面点击率高但 3 秒留存低，则说明视频开头没有承接封面承诺。
+      </p>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>封面方向</th>
+            <th>研究假设</th>
+            <th>生成方向</th>
+            <th>审核风险</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in coverExperiments" :key="item.title">
+            <td>{{ item.title }}</td>
+            <td>{{ item.thesis }}</td>
+            <td>{{ item.visual }}</td>
+            <td>{{ item.risk }}</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
-    <section class="war-section">
-      <div class="war-heading split">
-        <div>
-          <p class="war-eyebrow">素材实验台</p>
-          <h2>所有视频和封面先变成一行实验记录，再进入生产和测试</h2>
-        </div>
-        <p>
-          这一张表就是研究骨架。AI 可以填草稿，人负责审核，投放结果再回写。字段越清楚，复盘越能避免拍脑袋。
-        </p>
-      </div>
-      <div class="field-board">
+    <section class="report-section">
+      <h2>七、素材实验台字段</h2>
+      <p>
+        字段设计决定复盘质量。字段必须覆盖产品、目标人群、封面、脚本、画面、审核、投放和结论。字段越少，执行越轻；字段过少，复盘会失去归因能力。当前建议字段如下，后续应根据实际执行成本删减。
+      </p>
+      <div class="field-list">
         <span v-for="field in fields" :key="field">{{ field }}</span>
       </div>
     </section>
 
-    <section class="war-section">
-      <div class="war-heading split">
-        <div>
-          <p class="war-eyebrow">昊七七烤冷面样例</p>
-          <h2>第一批素材不追求完整包装，追求假设清楚、变量清楚、数据能解释</h2>
-        </div>
-      </div>
-      <div class="hypothesis-grid">
-        <article v-for="item in hypotheses" :key="item.hook" class="hypothesis-card">
-          <h3>{{ item.hook }}</h3>
-          <div>
-            <span>场景</span>
-            <p>{{ item.scene }}</p>
-          </div>
-          <div>
-            <span>画面</span>
-            <p>{{ item.image }}</p>
-          </div>
-          <div>
-            <span>测试目的</span>
-            <p>{{ item.test }}</p>
-          </div>
-        </article>
-      </div>
+    <section class="report-section">
+      <h2>八、昊七七烤冷面首批实验假设</h2>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>钩子</th>
+            <th>场景</th>
+            <th>核心画面</th>
+            <th>测试目的</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in hypotheses" :key="item.hook">
+            <td>{{ item.hook }}</td>
+            <td>{{ item.scene }}</td>
+            <td>{{ item.image }}</td>
+            <td>{{ item.test }}</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
-    <section class="war-section decision-section">
-      <div class="war-heading compact">
-        <p class="war-eyebrow">数据决策</p>
-        <h2>不要只问“视频好不好”，要问它坏在哪个环节</h2>
-      </div>
-      <div class="decision-map">
-        <div v-for="rule in dataRules" :key="rule[0]">
-          <strong>{{ rule[0] }}</strong>
-          <ArrowRight :size="16" />
-          <span>{{ rule[1] }}</span>
-        </div>
-      </div>
+    <section class="report-section">
+      <h2>九、数据决策规则</h2>
+      <p>
+        复盘时不应只判断“好不好”，而应判断问题发生在哪一层：封面、钩子、视频节奏、卖点、链接承接还是用户质疑。下表用于把异常指标转成下一步动作。
+      </p>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>观察到的问题</th>
+            <th>优先判断方向</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="rule in dataRules" :key="rule[0]">
+            <td>{{ rule[0] }}</td>
+            <td>{{ rule[1] }}</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
-    <section class="war-section final-board">
-      <div>
-        <GitBranch :size="24" />
-        <h2>最终雏形定义</h2>
-        <p>
-          昊七七烤冷面的 AI 爆款素材工作流，本质是一套“素材实验操作系统”：用数据选题，用 AI 扩量，用部门事实补真，用人工卡风险，用投放验证，用复盘沉淀规则。
-          当前结论仍是研究假设，需要用真实投放和真实部门协同验证。若验证成立，公司不是偶尔出一条爆款视频，而是持续制造、识别、复用爆款素材元素。
-        </p>
-      </div>
+    <section class="report-section report-conclusion">
+      <h2>十、当前研究结论</h2>
+      <p>
+        昊七七烤冷面的 AI 爆款素材工作流，本质是一套素材实验操作系统：用数据选题，用 AI 扩大候选空间，用部门事实补充真实性，用人工审核控制风险，用投放验证假设，用复盘沉淀规则。当前结论仍需真实投放验证；如果验证成立，公司获得的不是偶发爆款，而是持续制造、识别和复用爆款素材元素的能力。
+      </p>
     </section>
   </section>
 </template>

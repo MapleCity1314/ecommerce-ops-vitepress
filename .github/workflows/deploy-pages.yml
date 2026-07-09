@@ -1,4 +1,4 @@
-name: Build and publish VitePress to gh-pages
+name: Build and publish VitePress sites to gh-pages
 
 on:
   push:
@@ -34,11 +34,25 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build VitePress
+      # ── Build: existing SOP site (root of gh-pages) ──────────────────
+      - name: Build SOP docs
         env:
           VITEPRESS_BASE: /ecommerce-ops-vitepress/
         run: pnpm docs:build
 
+      # ── Build: interview site (nested under /interview/) ─────────────
+      - name: Build interview site
+        env:
+          VITEPRESS_BASE: /ecommerce-ops-vitepress/interview/
+        run: pnpm interview:build
+
+      # ── Merge: copy interview dist into SOP dist/interview/ ──────────
+      - name: Merge interview into docs dist
+        run: |
+          mkdir -p docs/.vitepress/dist/interview
+          cp -r interview/.vitepress/dist/. docs/.vitepress/dist/interview/
+
+      # ── Publish: push combined dist to gh-pages ──────────────────────
       - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:

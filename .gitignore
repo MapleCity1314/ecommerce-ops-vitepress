@@ -3,6 +3,8 @@ node_modules/
 .reasonix/
 docs/.vitepress/cache/
 docs/.vitepress/dist/
+interview/.vitepress/cache/
+interview/.vitepress/dist/
 .vitepress/cache/
 .vitepress/dist/
 .DS_Store

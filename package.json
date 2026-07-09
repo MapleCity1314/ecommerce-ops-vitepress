@@ -8,7 +8,10 @@
     "check:docs": "node scripts/check-docs.mjs",
     "docs:dev": "vitepress dev docs --host 0.0.0.0",
     "docs:build": "pnpm prepare:docs && vitepress build docs",
-    "docs:preview": "vitepress preview docs --host 0.0.0.0"
+    "docs:preview": "vitepress preview docs --host 0.0.0.0",
+    "interview:dev": "vitepress dev interview --host 0.0.0.0",
+    "interview:build": "vitepress build interview",
+    "interview:preview": "vitepress preview interview --host 0.0.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.2",

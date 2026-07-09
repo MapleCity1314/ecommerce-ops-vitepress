@@ -1,0 +1,1 @@
+import{_ as a,o as e,c as r,a2 as o}from"./chunks/framework.e-meDy3u.js";const u=JSON.parse('{"title":"总览与方案背景","description":"","frontmatter":{},"headers":[],"relativePath":"overview.md","filePath":"overview.md"}'),d={name:"overview.md"};function s(h,t,n,i,l,p){return e(),r("div",null,[...t[0]||(t[0]=[o("",19)])])}const _=a(d,[["render",s]]);export{u as __pageData,_ as default};

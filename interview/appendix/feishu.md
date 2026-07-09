@@ -85,7 +85,7 @@ for batch in chunks(records, 500):
 
 2026 年 3 月开源，可用命令行操作多维表格、文档等资源。对第一版是加分项，不是主路径——主路径是上面那套 REST API + Python SDK。
 
-如果你在演示时提到 lark-cli，要清楚它的定位：方便本地调试和快速操作，不替代生产级的 SDK 调用。
+lark-cli 定位是本地调试和快速操作，不替代生产级的 Python SDK 调用。
 
 ---
 

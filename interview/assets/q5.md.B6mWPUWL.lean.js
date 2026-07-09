@@ -1,0 +1,1 @@
+import{_ as o,o as a,c as r,a2 as e}from"./chunks/framework.e-meDy3u.js";const d=JSON.parse('{"title":"Q5 · 一线员工不愿意填表，怎么办？","description":"","frontmatter":{},"headers":[],"relativePath":"q5.md","filePath":"q5.md"}'),p={name:"q5.md"};function s(u,t,n,q,l,i){return a(),r("div",null,[...t[0]||(t[0]=[e("",38)])])}const c=o(p,[["render",s]]);export{d as __pageData,c as default};

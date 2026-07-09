@@ -1,0 +1,1 @@
+import{_ as a,o,c as e,a2 as r}from"./chunks/framework.e-meDy3u.js";const h=JSON.parse('{"title":"Q1 · 入职第一周，只能做一个 AI 工具，选什么？","description":"","frontmatter":{},"headers":[],"relativePath":"q1.md","filePath":"q1.md"}'),s={name:"q1.md"};function p(n,t,i,l,q,u){return o(),e("div",null,[...t[0]||(t[0]=[r("",18)])])}const c=a(s,[["render",p]]);export{h as __pageData,c as default};

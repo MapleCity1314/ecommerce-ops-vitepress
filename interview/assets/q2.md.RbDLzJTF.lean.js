@@ -1,0 +1,1 @@
+import{_ as a,o as d,c as e,a2 as r}from"./chunks/framework.e-meDy3u.js";const q=JSON.parse('{"title":"Q2 · 第一版最小可执行版本是什么？","description":"","frontmatter":{},"headers":[],"relativePath":"q2.md","filePath":"q2.md"}'),l={name:"q2.md"};function o(h,t,i,s,n,p){return d(),e("div",null,[...t[0]||(t[0]=[r("",23)])])}const u=a(l,[["render",o]]);export{q as __pageData,u as default};
